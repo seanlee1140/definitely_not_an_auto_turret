@@ -1,0 +1,5 @@
+opencv-python>=4.8.0
+# Future complete-runtime dependencies, once a full DETR detection checkpoint is provided:
+# transformers>=4.39.3
+# safetensors>=0.4.0
+# timm>=0.9.0
