@@ -30,13 +30,17 @@ class CameraTests(unittest.TestCase):
             fps=60,
             display_width=640,
             display_height=360,
+            flip_method=2,
         )
 
         self.assertIn("nvarguscamerasrc sensor-id=1", pipeline)
-        self.assertIn("width=1280,height=720", pipeline)
+        self.assertIn("width=1280,height=720,format=NV12", pipeline)
         self.assertIn("framerate=60/1", pipeline)
+        self.assertIn("flip-method=2", pipeline)
         self.assertIn("width=640,height=360", pipeline)
-        self.assertTrue(pipeline.endswith("video/x-raw,format=BGR ! appsink"))
+        self.assertTrue(
+            pipeline.endswith("video/x-raw,format=BGR ! appsink drop=true max-buffers=1 sync=false")
+        )
 
     def test_open_jetson_camera_raises_on_failure(self):
         captures = []
@@ -54,12 +58,14 @@ class CameraTests(unittest.TestCase):
                 fps=30,
                 display_width=960,
                 display_height=540,
+                flip_method=1,
                 video_capture_factory=fake_factory,
                 api_preference=123,
             )
 
         self.assertEqual(len(captures), 1)
         self.assertTrue(captures[0].released)
+        self.assertIn("flip-method=1", captures[0].pipeline)
 
 
 if __name__ == "__main__":  # pragma: no cover

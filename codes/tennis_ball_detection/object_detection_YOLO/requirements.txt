@@ -1,3 +1,4 @@
-ultralytics>=8.2.0
-onnxruntime>=1.17.0
-opencv-python>=4.8.0
+# JetPack already provides the TensorRT and OpenCV stack on Jetson.
+# Keep Python requirements minimal so pip does not replace NVIDIA's builds.
+ultralytics>=8.4.21
+onnx>=1.17.0
