@@ -1,1 +1,1 @@
-"""YOLO ONNX live tennis-ball detection app."""
+"""GPU-only TensorRT YOLO live tennis-ball detection app."""

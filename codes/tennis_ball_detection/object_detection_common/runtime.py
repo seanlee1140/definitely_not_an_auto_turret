@@ -34,6 +34,7 @@ def run_live_detection(args, detector, *, window_title: str):
         fps=args.fps,
         display_width=args.display_width,
         display_height=args.display_height,
+        flip_method=args.flip_method,
     )
 
     try:

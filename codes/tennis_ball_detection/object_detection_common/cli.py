@@ -38,4 +38,21 @@ def build_live_detection_parser(
         default=0.25,
         help="Minimum confidence required to keep a detection.",
     )
+    parser.add_argument(
+        "--device",
+        default="0",
+        help="CUDA device string for Jetson TensorRT inference, usually '0'.",
+    )
+    parser.add_argument(
+        "--imgsz",
+        type=int,
+        default=640,
+        help="Square inference image size used by Ultralytics.",
+    )
+    parser.add_argument(
+        "--flip-method",
+        type=int,
+        default=0,
+        help="Jetson nvvidconv flip-method value for the CSI camera pipeline.",
+    )
     return parser

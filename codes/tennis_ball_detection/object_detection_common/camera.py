@@ -21,12 +21,13 @@ def build_gstreamer_pipeline(
 ) -> str:
     return (
         f"nvarguscamerasrc sensor-id={sensor_id} ! "
-        f"video/x-raw(memory:NVMM),width={width},height={height},"
+        f"video/x-raw(memory:NVMM),width={width},height={height},format=NV12,"
         f"framerate={fps}/1 ! "
         f"nvvidconv flip-method={flip_method} ! "
         f"video/x-raw,width={display_width},height={display_height},"
         f"format=BGRx ! videoconvert ! "
-        f"video/x-raw,format=BGR ! appsink"
+        "video/x-raw,format=BGR ! "
+        "appsink drop=true max-buffers=1 sync=false"
     )
 
 
@@ -38,6 +39,7 @@ def open_jetson_camera(
     fps: int,
     display_width: int,
     display_height: int,
+    flip_method: int = 0,
     video_capture_factory=None,
     api_preference=None,
 ):
@@ -48,6 +50,7 @@ def open_jetson_camera(
         fps=fps,
         display_width=display_width,
         display_height=display_height,
+        flip_method=flip_method,
     )
 
     if video_capture_factory is None:
