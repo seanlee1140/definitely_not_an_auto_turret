@@ -40,7 +40,7 @@ class GimbalController:
         timeout: Serial readline timeout in seconds.
     """
 
-    STEPS_PER_REV = 2048   # 28BYJ-48 half-step
+    STEPS_PER_REV = 400    # Sanyo 1.8°/step, half-step mode (200 full × 2)
 
     def __init__(
         self,
